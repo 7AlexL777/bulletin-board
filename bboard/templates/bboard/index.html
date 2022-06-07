@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% extends "layout/basic.html" %}
 <html>
     <head>
         <meta charset="UTF-8">
@@ -13,14 +14,16 @@
             <a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }}</a>
             {% endfor %}
         </div>
+        {% block content %}
         {% for bb in bbs %}
         <div>
             <h2>{{ bb.title }}</h2>
             <p>{{ bb.content }}</p>
-            <p><a href="/bboard/{{ bb.rubric.pk }}/">
+            <p><a href="{% url 'by_rubric' bb.rubric.pk %}">
             {{ bb.rubric.name }}</a></p>
             <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
         </div>
         {% endfor %}
+        {% endblock %}
     </body>
 </html>
